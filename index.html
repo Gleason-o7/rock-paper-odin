@@ -7,7 +7,7 @@
 </head>
 <body>
     <script>
-
+        
         function getComputerChoice () {
 
             // getting a random whole integer between 0 and 2 
@@ -34,8 +34,8 @@
 
             // sufficient resolution messages for each game
             tieMessage = `Both choice ${playersChoice}, tie`
-            winMessage = `Opponent chose ${compChoice}, you win!`
-            loseMessage = `Opponent chose ${compChoice}, you lose...`
+            winMessage = `Opponent chose ${compChoice}, only ${4 - playerScore} wins left!`
+            loseMessage = `Opponent chose ${compChoice}, opponent needs to win ${4 - compScore} more.`
 
             // validation to ensure the user input is valid
             if (!['rock', 'paper', 'scissors'].includes(playersChoice)){
@@ -45,11 +45,32 @@
                 if (playersChoice == compChoice) {
                     console.log(tieMessage);
                 } else if ((playersChoice == 'rock' && compChoice == 'scissors') || (playersChoice == 'scissors' && compChoice == 'paper') || (playersChoice == 'paper' && compChoice == 'rock')) {
+                    ++playerScore
+                    if (playerScore < 5) {
                     console.log(winMessage);
+                    }
                 } else {
-                    console.log(loseMessage);
+                    compScore++;
+                    if (compScore < 5) {
+                        console.log(loseMessage);
+                    }
                 }
             }
+        }
+        
+        function game() {
+            playerScore = 0;
+            compScore = 0;
+            while (playerScore < 5 && compScore < 5) {
+                playRound();
+            }
+            if (playerScore > compScore) {
+                console.log("You won!");
+            }
+            else {
+                console.log("You lost.");
+            }
+            
         }
     </script>
 </body>
