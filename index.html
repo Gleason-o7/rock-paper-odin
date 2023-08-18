@@ -7,18 +7,50 @@
 </head>
 <body>
     <script>
+
         function getComputerChoice () {
+
+            // getting a random whole integer between 0 and 2 
             compChoice = Math.floor(Math.random() * 3);
+
+            // substituting 0, 1, and 2 for rock, paper, and scissors
             if (compChoice === 0) {
-                compChoice = "Rock!";
+                return "rock";
             } else if (compChoice ===1) {
-                compChoice = "Paper!";
+                return "paper";
             } else {
-                compChoice = "Scissors!";
+                return "scissors";
+            }
+        }        
+
+        function playRound() {
+
+            // prompts the user for input and cleans it up
+            playersChoice = prompt("So? rock, paper, or scissors?")
+            playersChoice = playersChoice.trim().toLowerCase();
+
+            // gets randpm computer input
+            compChoice = getComputerChoice();
+
+            // sufficient resolution messages for each game
+            tieMessage = `Both choice ${playersChoice}, tie`
+            winMessage = `Opponent chose ${compChoice}, you win!`
+            loseMessage = `Opponent chose ${compChoice}, you lose...`
+
+            // validation to ensure the user input is valid
+            if (!['rock', 'paper', 'scissors'].includes(playersChoice)){
+                console.log("Invalid choice, try again");
+            } else {
+                // if the user input is valid, return resolution message
+                if (playersChoice == compChoice) {
+                    console.log(tieMessage);
+                } else if ((playersChoice == 'rock' && compChoice == 'scissors') || (playersChoice == 'scissors' && compChoice == 'paper') || (playersChoice == 'paper' && compChoice == 'rock')) {
+                    console.log(winMessage);
+                } else {
+                    console.log(loseMessage);
+                }
             }
         }
-
-        userInput = prompt("So? rock, paper, or scissors?")
     </script>
 </body>
 </html>
